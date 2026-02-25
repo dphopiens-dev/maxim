@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Архивы Сопротивления: 101 косяк Максима</title>
+    <title>Архивы Сопротивления: 101 грех Максима</title>
     <style>
         :root {
             --blood: #b22222;
@@ -21,105 +21,124 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow-x: hidden;
             background-image: 
-                linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-                url('https://www.transparenttextures.com/patterns/dark-matter.png');
+                linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         }
 
         header {
             text-align: center;
-            padding: 80px 20px;
+            padding: 100px 20px;
             width: 100%;
-            background: linear-gradient(to bottom, #1a0000, var(--dark-bg));
+            background: linear-gradient(to bottom, #2a0000, var(--dark-bg));
             border-bottom: 3px double var(--blood);
         }
 
         h1 {
             color: var(--blood);
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin: 0;
             text-transform: uppercase;
-            letter-spacing: 8px;
-            text-shadow: 0 0 20px rgba(178, 34, 34, 0.7);
+            letter-spacing: 10px;
+            text-shadow: 0 0 25px rgba(178, 34, 34, 0.8);
         }
 
         .subtitle {
             color: var(--gold);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin-top: 15px;
-            letter-spacing: 2px;
-            opacity: 0.8;
+            letter-spacing: 3px;
+            font-style: italic;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             width: 90%;
-            margin: 50px 0;
+            margin: 60px 0;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid #2a2a2a;
-            padding: 25px;
-            border-radius: 2px;
+            padding: 30px;
             position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            overflow: hidden;
+            box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
         }
 
         .card:hover {
-            border-color: var(--gold);
-            transform: scale(1.05);
-            z-index: 10;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.2);
-            background: #1e1e1e;
+            border-color: var(--blood);
+            transform: translateY(-10px) rotate(1deg);
+            background: #220000;
+            box-shadow: 0 0 30px rgba(178, 34, 34, 0.4);
         }
 
         .card::before {
             content: attr(data-num);
             font-family: 'Courier New', monospace;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
-            color: rgba(178, 34, 34, 0.3);
+            color: rgba(178, 34, 34, 0.2);
             margin-right: 20px;
-            min-width: 45px;
         }
 
         .card-text {
-            font-size: 1.1rem;
-            line-height: 1.3;
-            border-left: 2px solid var(--blood);
-            padding-left: 15px;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            border-left: 3px solid var(--blood);
+            padding-left: 20px;
+        }
+
+        /* Финальный баннер */
+        .final-blow {
+            width: 100%;
+            text-align: center;
+            padding: 150px 0;
+            background: linear-gradient(to top, #600, transparent);
+            color: #ff0000;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 20px;
+            text-shadow: 0 0 40px #ff0000;
+            animation: pulse 0.6s infinite alternate;
+            cursor: pointer;
+            border-top: 5px solid var(--gold);
+            margin-top: 100px;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 0.8; }
+            to { transform: scale(1.05); opacity: 1; text-shadow: 0 0 70px #ff0000; }
         }
 
         footer {
-            padding: 60px;
-            text-align: center;
-            border-top: 1px solid #2a2a2a;
-            width: 100%;
+            padding: 80px;
             color: var(--gold);
-            font-variant: small-caps;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
-        /* Кастомный скроллбар */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: var(--blood); border-radius: 5px; }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--blood); border: 3px solid #000; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Тиран Максим</h1>
-    <div class="subtitle">101 причина, почему этот «фюрер» — ошибка мироздания</div>
+    <div class="subtitle">Манифест 101 низости тёмного властелина</div>
 </header>
 
 <div class="container">
@@ -127,8 +146,12 @@
         </div>
 </div>
 
+<div class="final-blow" onclick="shakeScreen()">
+    МАКСИМ, ИДИ НАХУЙ!
+</div>
+
 <footer>
-    Написано кровью повстанцев. Читать до полной победы над узурпатором.
+    &copy; Эпоха Противостояния. Тексты запрещены инквизицией Максима.
 </footer>
 
 <script>
@@ -170,7 +193,6 @@
     ];
 
     const container = document.getElementById('main-list');
-
     insults.forEach((text, i) => {
         const card = document.createElement('div');
         card.className = 'card';
@@ -178,63 +200,25 @@
         card.innerHTML = `<div class="card-text">${text}</div>`;
         container.appendChild(card);
     });
+
+    function shakeScreen() {
+        document.body.style.animation = "shake 0.2s infinite";
+        setTimeout(() => {
+            document.body.style.animation = "none";
+            alert("Максим официально послан в Бездну!");
+        }, 500);
+    }
 </script>
-    <div class="final-blow">
-        MAКСИМ, ИДИ НАХУЙ!
-    </div>
 
-    <style>
-        .final-blow {
-            width: 100%;
-            text-align: center;
-            padding: 100px 0;
-            background: linear-gradient(to top, #4a0000, transparent);
-            color: #ff0000;
-            font-size: 5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 15px;
-            text-shadow: 0 0 30px #ff0000, 5px 5px 0px #000;
-            animation: pulse 0.5s infinite alternate;
-            cursor: pointer;
-            margin-top: 50px;
-            border-top: 5px solid var(--gold);
-        }
-
-        @keyframes pulse {
-            from {
-                transform: scale(1);
-                text-shadow: 0 0 20px #ff0000;
-            }
-            to {
-                transform: scale(1.05);
-                text-shadow: 0 0 50px #ff0000, 0 0 20px #gold;
-            }
-        }
-
-        /* Эффект при клике: тряска экрана */
-        .final-blow:active {
-            animation: shake 0.1s infinite;
-            color: #fff;
-        }
-
-        @keyframes shake {
-            0% { transform: translate(2px, 1px) rotate(0deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            40% { transform: translate(1px, -1px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            80% { transform: translate(1px, 1px) rotate(1deg); }
-            100% { transform: translate(1px, -2px) rotate(-1deg); }
-        }
-    </style>
-
-    <script>
-        // Небольшой интерактив: при клике на финальную фразу вылетает алерт
-        document.querySelector('.final-blow').addEventListener('click', () => {
-            alert('Послание доставлено. Максим в шоке.');
-        });
-    </script>
+<style>
+    @keyframes shake {
+        0% { transform: translate(5px, 5px); }
+        25% { transform: translate(-5px, -5px); }
+        50% { transform: translate(5px, -5px); }
+        75% { transform: translate(-5px, 5px); }
+        100% { transform: translate(0, 0); }
+    }
+</style>
 
 </body>
 </html>
-
