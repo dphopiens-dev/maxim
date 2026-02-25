@@ -3,188 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAXIM MULTIVERSE: DISS vs TILT</title>
+    <title>MAXIM TILT: MULTITRACK</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@900&family=Roboto+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700;900&family=Ubuntu+Mono&display=swap');
 
         :root {
-            --neon: #00ff41;
             --dota-red: #eb4b4b;
-            --bg: #050505;
-            --panel: #111;
+            --dota-green: #4d8a31;
+            --dota-dark: #121415;
+            --gold: #f1c40f;
+            --active-color: var(--dota-red);
         }
 
         body {
-            background-color: var(--bg);
-            color: white;
-            font-family: 'Roboto Mono', monospace;
+            background: var(--dota-dark);
+            background-image: radial-gradient(circle at center, #1a1c1e 0%, #0a0a0a 100%);
+            color: #e1e1e1;
+            font-family: 'Exo 2', sans-serif;
             margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: background 0.5s ease;
-            overflow-x: hidden;
+            transition: background 0.8s ease;
         }
 
         header {
             text-align: center;
-            padding: 50px 20px;
-            z-index: 10;
+            padding: 60px 20px;
+            z-index: 5;
         }
 
-        .glitch-title {
-            font-family: 'Exo 2', sans-serif;
-            font-size: clamp(2rem, 8vw, 4rem);
+        .main-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin: 0;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            color: white;
-            text-shadow: 2px 2px var(--dota-red), -2px -2px var(--neon);
+            background: linear-gradient(to bottom, #fff, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 10px;
         }
 
-        /* Панель управления */
-        .controls {
+        .mmr-box {
+            background: rgba(0,0,0,0.7);
+            padding: 15px 30px;
+            border: 1px solid #333;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-family: 'Ubuntu Mono', monospace;
+            font-size: 1.5rem;
+        }
+
+        #mmr-val { color: var(--gold); text-shadow: 0 0 10px rgba(241, 196, 15, 0.5); }
+
+        /* Панель выбора трека */
+        .track-selector {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             margin: 30px 0;
-            flex-wrap: wrap;
-            justify-content: center;
+            z-index: 5;
         }
 
-        .btn {
-            padding: 20px 40px;
+        .play-btn {
+            padding: 15px 40px;
             border: none;
             font-family: 'Exo 2', sans-serif;
             font-weight: 900;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             cursor: pointer;
             transition: 0.3s;
             clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+            color: white;
         }
 
-        .btn-diss { background: var(--neon); color: black; }
-        .btn-tilt { background: var(--dota-red); color: white; }
-        
-        .btn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+        .v1 { background: linear-gradient(to bottom, #4d8a31, #2d5a1a); border: 1px solid #6dbb4a; }
+        .v2 { background: linear-gradient(to bottom, #eb4b4b, #8a2222); border: 1px solid #ff5c5c; }
 
-        /* Контейнер с текстом */
-        .lyrics-wrapper {
+        .play-btn:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 5px 20px rgba(255,255,255,0.2); }
+        .play-btn.active { box-shadow: 0 0 30px white; border: 2px solid white; }
+
+        /* Текст песни */
+        .lyrics-card {
             max-width: 800px;
             width: 90%;
-            background: var(--panel);
+            background: rgba(20, 22, 24, 0.95);
             border: 1px solid #333;
-            padding: 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            display: none; /* Появится при нажатии */
-        }
-
-        .section-label { color: #888; font-size: 0.8rem; display: block; margin-bottom: 10px; }
-        .lyrics-text { white-space: pre-line; font-size: 1.2rem; line-height: 1.6; }
-        .chorus { color: var(--dota-red); font-style: italic; border-left: 3px solid var(--dota-red); padding-left: 20px; }
-
-        .footer-shout {
-            font-size: 4vw;
-            font-weight: 900;
-            color: var(--dota-red);
-            text-align: center;
             padding: 50px;
-            display: none;
+            margin-bottom: 80px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            border-top: 4px solid var(--active-color);
+            transition: border-color 0.5s ease;
         }
 
-        /* MMR Счетчик */
-        #mmr-display {
-            font-size: 1.5rem;
-            color: #ffd700;
-            margin-top: 10px;
-            display: none;
+        .section { margin-bottom: 35px; line-height: 1.6; }
+        .label { color: #666; font-size: 0.8rem; letter-spacing: 3px; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        .text { font-size: 1.3rem; white-space: pre-line; }
+        
+        .chorus-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 5px solid var(--active-color);
+            padding: 25px;
+            margin: 20px 0;
+            transition: border-color 0.5s ease;
         }
+
+        .highlight { color: var(--gold); font-weight: bold; }
+        .rage { color: var(--dota-red); font-weight: 900; font-size: 1.8rem; }
+
+        footer { padding: 50px; opacity: 0.4; font-size: 0.8rem; letter-spacing: 1px; }
+
+        @keyframes shake {
+            0% { transform: translate(2px, 2px); }
+            50% { transform: translate(-2px, -2px); }
+            100% { transform: translate(0, 0); }
+        }
+        .shake-effect { animation: shake 0.1s infinite; }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="glitch-title">ВЫБЕРИ СУДЬБУ МАКСИМА</div>
-    <div id="mmr-display">MMR: <span id="rating">4200</span></div>
+    <h1 class="main-title">LOW PRIORITY</h1>
+    <div class="mmr-box">MMR: <span id="mmr-val">4200</span></div>
 </header>
 
-<div class="controls">
-    <button class="btn btn-diss" onclick="startTrack('music.mp3', 'diss')">ВРУБИТЬ ДИСС</button>
-    <button class="btn btn-tilt" onclick="startTrack('music2.mp3', 'tilt')">DOTA TILT (ALT)</button>
+<div class="track-selector">
+    <button class="play-btn v1" onclick="playMusic('music.mp3', 'v1')">VERSION 1</button>
+    <button class="play-btn v2" onclick="playMusic('music2.mp3', 'v2')">VERSION 2 (ALT)</button>
 </div>
 
-<div id="lyrics-diss" class="lyrics-wrapper">
-    <span class="section-label">// DATA_CORRUPTION_DETECTED</span>
-    <div class="lyrics-text">
-        Йоу, Макс, я заглянул в твою черепную коробку,
-        Там перекати-поле и застрявшая пробка.
-        Ты думаешь медленно, как винда на дискете,
-        Ты — самый тупой персонаж на этой планете.
-        <b>Твой мозг настолько мал, что у него есть свой микроскоп!</b>
+<div class="lyrics-card" id="lyrics-ui">
+    
+    <div class="section">
+        <span class="label">[Intro]</span>
+        <span class="text highlight">(Бодрый фанковый бас, чистая электрогитара с эффектом "вау-вау")</span>
+    </div>
+
+    <div class="section">
+        <span class="label">[Verse 1]</span>
+        <div class="text">
+            Ты помнишь: те планы, у фонтана,
+            Победа была нам желанна.
+            Крипов на лайне казалось так мало, я не фармил...
+            Это было на хард, а теперь я в таверне скучаю,
+            Потому что в ебло получаю, это всё скилл!
+            И я хуярю слоты, я ебал мам их,
+            Я походу сосу на любых лайнах.
+            Я ебаный ублюдок, на изи скайтить...
+            Научи меня, блять, игре!
+        </div>
+    </div>
+
+    <div class="chorus-box" id="chorus-ui">
+        <span class="label">[Chorus]</span>
+        <div class="text">
+            Эта катка — будет хуйнёй!
+            Ебись конём, ссаный позор!
+            Она пройдёт, а затем по пизде...
+            И регну ещё!
+            Эта катка — будет хуйнёй!
+            Разбей лицо об монитор!
+            Мой рейтинг сдох, я в глубокой узде...
+            И регну ещё!
+        </div>
+    </div>
+
+    <div class="section">
+        <span class="label">[Verse 2]</span>
+        <div class="text">
+            Мид разбит, саппорт варит Мидас,
+            В общем, обычный у нас перепляс.
+            Курьер несёт мне Рапиру, но я её сразу просру.
+            Я нажимаю «Байбек» в пустоту,
+            Я проклинаю свою доброту,
+            Я обещаю, что завтра я точно удалю игру!
+            Но пальцы помнят пароль от Стима,
+            Эта зависимость неизлечима.
+            Я снова жму поиск, я снова в говне...
+            Научи меня, блять, игре!
+        </div>
+    </div>
+
+    <div class="section">
+        <span class="label">[Bridge]</span>
+        <div class="text">
+            Скрытый пул... он как туман...
+            Я в ловушке, это обман...
+            <span class="rage">ДАЙТЕ МНЕ НОРМАЛЬНУЮ ТИМУ! А-А-А!</span>
+        </div>
+    </div>
+
+    <div class="section" style="text-align: center; border-top: 1px solid #333; padding-top: 20px;">
+        <span class="label">[Outro]</span>
+        <div class="text">
+            Регну ещё... Ещё одну и спать...
+            Ну всё, последнюю...
+            <br><br>
+            <span style="color: var(--dota-red); font-weight: 900;">МАКСИМ, ИДИ НАХУЙ!</span>
+        </div>
     </div>
 </div>
 
-<div id="lyrics-tilt" class="lyrics-wrapper">
-    <span class="section-label">// LOW_PRIORITY_MODE</span>
-    <div class="lyrics-text">
-        <span class="chorus">Эта катка — будет хуйнёй!
-        Ебись конём, ссаный позор!
-        Она пройдёт, а затем по пизде...
-        И регну ещё!</span>
-        
-        Мид разбит, саппорт варит Мидас,
-        В общем, обычный у нас перепляс.
-        Курьер несёт мне Рапиру, но я её сразу просру.
-    </div>
-</div>
+<footer>HIDDEN POOL RECORDS // SYSTEM_STATUS: TILTING</footer>
 
-<div id="shout" class="footer-shout">МАКСИМ, ИДИ НАХУЙ!</div>
-
-<audio id="audioPlayer"></audio>
+<audio id="player"></audio>
 
 <script>
-    const player = document.getElementById('audioPlayer');
-    const mmrBox = document.getElementById('mmr-display');
-    const rating = document.getElementById('rating');
+    const player = document.getElementById('player');
+    const mmrVal = document.getElementById('mmr-val');
+    const lyricsUI = document.getElementById('lyrics-ui');
+    const chorusUI = document.getElementById('chorus-ui');
+    let mmrInterval;
 
-    function startTrack(file, mode) {
-        // Сбрасываем всё
+    function playMusic(file, vClass) {
+        // Сброс анимаций и плеера
         player.pause();
         player.src = file;
         
-        // Прячем все тексты
-        document.getElementById('lyrics-diss').style.display = 'none';
-        document.getElementById('lyrics-tilt').style.display = 'none';
-        document.getElementById('shout').style.display = 'block';
+        // Визуальное переключение
+        document.querySelectorAll('.play-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.' + vClass).classList.add('active');
 
-        // Включаем нужный режим
-        if (mode === 'diss') {
-            document.body.style.background = "radial-gradient(circle, #001a05 0%, #050505 100%)";
-            document.getElementById('lyrics-diss').style.display = 'block';
-            mmrBox.style.display = 'none';
-        } else {
-            document.body.style.background = "radial-gradient(circle, #2c0e0e 0%, #121415 100%)";
-            document.getElementById('lyrics-tilt').style.display = 'block';
-            mmrBox.style.display = 'block';
-            startMMRDrop();
-        }
-
-        player.play().catch(() => alert("Файл " + file + " не найден в папке!"));
+        // Смена цветов
+        const color = vClass === 'v1' ? '#4d8a31' : '#eb4b4b';
+        const bg = vClass === 'v1' ? '#0e1a0e' : '#1a0e0e';
         
-        // Скролл
-        window.scrollTo({ top: 500, behavior: 'smooth' });
+        document.body.style.background = `radial-gradient(circle at center, ${bg} 0%, #0a0a0a 100%)`;
+        lyricsUI.style.borderColor = color;
+        chorusUI.style.borderColor = color;
+
+        // Запуск
+        player.play().then(() => {
+            startMMRDrop();
+            lyricsUI.scrollIntoView({ behavior: 'smooth' });
+        }).catch(() => alert("Файл " + file + " не найден!"));
     }
 
     function startMMRDrop() {
-        let currentMMR = 4200;
-        const timer = setInterval(() => {
-            currentMMR -= Math.floor(Math.random() * 60);
-            if (currentMMR <= 1) {
-                currentMMR = 1;
-                clearInterval(timer);
+        if (mmrInterval) clearInterval(mmrInterval);
+        let mmr = 4200;
+        mmrInterval = setInterval(() => {
+            mmr -= Math.floor(Math.random() * 45);
+            if (mmr <= 10) {
+                mmr = 10;
+                clearInterval(mmrInterval);
+                document.body.classList.add('shake-effect');
+                setTimeout(() => document.body.classList.remove('shake-effect'), 1000);
             }
-            rating.innerText = currentMMR;
-        }, 100);
+            mmrVal.innerText = mmr;
+        }, 150);
     }
 </script>
 
