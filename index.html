@@ -74,7 +74,7 @@
         }
 
         #iq-fill {
-            width: 2%; /* Максим же */
+            width: 90%; /* Начальное значение для анимации */
             height: 100%;
             background: var(--danger);
             box-shadow: 0 0 20px var(--danger);
@@ -113,6 +113,11 @@
         .bar {
             width: 10px;
             background: var(--neon);
+            height: 10px;
+        }
+
+        /* Анимация бара включается через класс */
+        .anim-active {
             animation: bounce 0.5s ease-in-out infinite alternate;
         }
 
@@ -142,26 +147,39 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 20px;
+            font-size: 1.2rem;
         }
 
-        button:hover { background: white; }
+        button:hover { background: white; box-shadow: 0 0 20px var(--neon); }
+
+        #audio-status {
+            font-size: 0.8rem;
+            margin-top: 10px;
+            color: var(--neon);
+        }
     </style>
 </head>
 <body>
 
+<audio id="dissAudio">
+    <source src="music.mp3" type="audio/mpeg">
+    Твой браузер не тянет музыку.
+</audio>
+
 <header>
     <div class="glitch">МАКСИМ УЕБАН</div>
     <p>ERROR 404: BRAIN NOT FOUND</p>
-    <button onclick="document.getElementById('lyrics').scrollIntoView({behavior: 'smooth'})">СЛУШАТЬ ДИСС</button>
+    <button id="playBtn">СЛУШАТЬ ДИСС</button>
+    <div id="audio-status"></div>
 </header>
 
 <div class="meter-container">
     <h2>УРОВЕНЬ IQ МАКСИМА</h2>
     <div id="iq-bar"><div id="iq-fill"></div></div>
-    <p id="iq-status">СТАТУС: КЛИНИЧЕСКИЙ СЛУЧАЙ</p>
+    <p id="iq-status">СТАТУС: АНАЛИЗ...</p>
 </div>
 
-<div class="visualizer">
+<div class="visualizer" id="viz">
     <div class="bar" style="animation-delay: 0.1s"></div>
     <div class="bar" style="animation-delay: 0.3s"></div>
     <div class="bar" style="animation-delay: 0.2s"></div>
@@ -210,17 +228,36 @@
 </div>
 
 <script>
-    // Анимация бара при скролле
-    window.onscroll = function() {
-        if (window.scrollY > 100) {
-            document.getElementById('iq-fill').style.width = "0.1%";
-        }
-    };
+    const audio = document.getElementById('dissAudio');
+    const playBtn = document.getElementById('playBtn');
+    const bars = document.querySelectorAll('.bar');
+    const iqFill = document.getElementById('iq-fill');
+    const iqStatus = document.getElementById('iq-status');
 
-    // Рандомные факты о тупости Максима в консоль
-    console.log("Максим думает, что HTML — это марка машины.");
-    console.log("Максим поливает кактус кока-колой.");
-    console.log("Максим пытается зарядить телефон от микроволновки.");
+    playBtn.addEventListener('click', () => {
+        // Запуск аудио
+        audio.play().then(() => {
+            document.getElementById('audio-status').innerText = "TRACK PLAYING...";
+            // Включаем анимацию визуализатора
+            bars.forEach(bar => bar.classList.add('anim-active'));
+        }).catch(e => {
+            document.getElementById('audio-status').innerText = "ОШИБКА: Закинь music.mp3 в папку!";
+            console.error("Файл music.mp3 не найден", e);
+        });
+
+        // Скролл к тексту
+        document.getElementById('lyrics').scrollIntoView({behavior: 'smooth'});
+        
+        // Анимация падения IQ
+        setTimeout(() => {
+            iqFill.style.width = "0.1%";
+            iqStatus.innerText = "СТАТУС: КЛИНИЧЕСКИЙ СЛУЧАЙ (0.1 IQ)";
+        }, 500);
+    });
+
+    // Консольные пасхалки
+    console.log("System: Maxim detection completed.");
+    console.log("Result: 100% ueban.");
 </script>
 
 </body>
