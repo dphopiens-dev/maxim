@@ -1,3 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хроники Тирана: 101 грех Максима</title>
+    <style>
+        :root {
+            --blood: #8b0000;
+            --gold: #d4af37;
+            --dark: #0a0a0a;
+            --gray: #1a1a1a;
+            --text: #c0c0c0;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--text);
+            font-family: 'Georgia', serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 2px dashed var(--blood);
+            width: 100%;
+            background: linear-gradient(to bottom, #000, transparent);
+        }
+
+        h1 {
+            color: var(--blood);
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 0;
+            text-shadow: 2px 2px 10px rgba(139, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: var(--gold);
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            margin: 40px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background: var(--gray);
+            border: 1px solid #333;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .card:hover {
+            border-color: var(--blood);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
+            background: #222;
+        }
+
+        .card::before {
+            content: attr(data-num);
+            font-weight: bold;
+            color: var(--blood);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .card-text {
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            padding: 40px;
+            color: var(--gold);
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* Скроллбар в стиле крови */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--blood); }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Максим: Анатомия Зла</h1>
+    <p class="subtitle">101 свидетельство того, почему этот тиран должен пасть</p>
+</header>
+
+<div class="container">
+    <div class="grid" id="list">
+        </div>
+</div>
+
+<footer>
+    &copy; Летописи Сопротивления. Смерть узурпатору.
+</footer>
+
 <script>
     const reasons = [
         "Максим — в жопе апельсин.",
@@ -118,3 +243,21 @@
         listContainer.appendChild(card);
     });
 </script>
+    const listContainer = document.getElementById('list');
+
+    reasons.forEach((reason, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.setAttribute('data-num', index + 1);
+        
+        const text = document.createElement('div');
+        text.className = 'card-text';
+        text.textContent = reason;
+        
+        card.appendChild(text);
+        listContainer.appendChild(card);
+    });
+</script>
+
+</body>
+</html>
