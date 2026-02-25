@@ -3,222 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Архивы Сопротивления: 101 грех Максима</title>
+    <title>MAXIM_DISS_TRACK.exe</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Mono:wght@400;700&display=swap');
+
         :root {
-            --blood: #b22222;
-            --gold: #d4af37;
-            --dark-bg: #0a0a0a;
-            --card-bg: #161616;
-            --text: #d1d1d1;
+            --neon: #00ff41;
+            --bg: #050505;
+            --danger: #ff003c;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--text);
-            font-family: 'Constantia', 'Georgia', serif;
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Roboto Mono', monospace;
             margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* Glitch Header */
+        header {
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-        }
-
-        header {
+            background: radial-gradient(circle, #111 0%, #000 100%);
             text-align: center;
-            padding: 100px 20px;
-            width: 100%;
-            background: linear-gradient(to bottom, #2a0000, var(--dark-bg));
-            border-bottom: 3px double var(--blood);
         }
 
-        h1 {
-            color: var(--blood);
-            font-size: 4rem;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            text-shadow: 0 0 25px rgba(178, 34, 34, 0.8);
-        }
-
-        .subtitle {
-            color: var(--gold);
-            font-size: 1.4rem;
-            margin-top: 15px;
-            letter-spacing: 3px;
-            font-style: italic;
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 90%;
-            margin: 60px 0;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #2a2a2a;
-            padding: 30px;
+        .glitch {
+            font-size: 8vw;
+            font-family: 'Oswald', sans-serif;
             position: relative;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            box-shadow: 10px 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .card:hover {
-            border-color: var(--blood);
-            transform: translateY(-10px) rotate(1deg);
-            background: #220000;
-            box-shadow: 0 0 30px rgba(178, 34, 34, 0.4);
-        }
-
-        .card::before {
-            content: attr(data-num);
-            font-family: 'Courier New', monospace;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: rgba(178, 34, 34, 0.2);
-            margin-right: 20px;
-        }
-
-        .card-text {
-            font-size: 1.2rem;
-            line-height: 1.4;
-            border-left: 3px solid var(--blood);
-            padding-left: 20px;
-        }
-
-        /* Финальный баннер */
-        .final-blow {
-            width: 100%;
-            text-align: center;
-            padding: 150px 0;
-            background: linear-gradient(to top, #600, transparent);
-            color: #ff0000;
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 900;
+            color: var(--neon);
             text-transform: uppercase;
-            letter-spacing: 20px;
-            text-shadow: 0 0 40px #ff0000;
-            animation: pulse 0.6s infinite alternate;
+            animation: glitch 1s linear infinite;
+        }
+
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+
+        .glitch::before, .glitch::after {
+            content: "МАКСИМ УЕБАН";
+            position: absolute; left: 0;
+        }
+
+        .glitch::before { animation: glitchTop 1s linear infinite; clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%); }
+        @keyframes glitchTop { 2%, 64% { transform: translate(2px,-2px); } 4%, 60% { transform: translate(-2px,2px); } }
+
+        /* Brain-o-Meter */
+        .meter-container {
+            padding: 50px;
+            background: #111;
+            border: 2px solid var(--neon);
+            margin: 20px;
+            text-align: center;
+        }
+
+        #iq-bar {
+            width: 100%;
+            height: 30px;
+            background: #222;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        #iq-fill {
+            width: 2%; /* Максим же */
+            height: 100%;
+            background: var(--danger);
+            box-shadow: 0 0 20px var(--danger);
+            transition: width 2s ease-in-out;
+        }
+
+        /* Diss Section */
+        .diss-lyrics {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 5px solid var(--neon);
+        }
+
+        .punchline {
+            color: var(--danger);
+            font-weight: bold;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 10px;
+            border-bottom: 1px dashed var(--danger);
+        }
+
+        .visualizer {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100px;
+            gap: 5px;
+            margin: 40px 0;
+        }
+
+        .bar {
+            width: 10px;
+            background: var(--neon);
+            animation: bounce 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { height: 10px; }
+            to { height: 80px; }
+        }
+
+        .footer-banner {
+            background: var(--danger);
+            color: black;
+            font-weight: 900;
+            font-size: 5rem;
+            padding: 50px 0;
+            text-align: center;
+            transform: rotate(-2deg);
+            width: 110%;
+            margin-left: -5%;
+        }
+
+        button {
+            background: var(--neon);
+            color: black;
+            padding: 15px 30px;
+            border: none;
+            font-family: 'Roboto Mono';
+            font-weight: bold;
             cursor: pointer;
-            border-top: 5px solid var(--gold);
-            margin-top: 100px;
+            margin-top: 20px;
         }
 
-        @keyframes pulse {
-            from { transform: scale(1); opacity: 0.8; }
-            to { transform: scale(1.05); opacity: 1; text-shadow: 0 0 70px #ff0000; }
-        }
-
-        footer {
-            padding: 80px;
-            color: var(--gold);
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: var(--blood); border: 3px solid #000; }
+        button:hover { background: white; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Тиран Максим</h1>
-    <div class="subtitle">Манифест 101 низости тёмного властелина</div>
+    <div class="glitch">МАКСИМ УЕБАН</div>
+    <p>ERROR 404: BRAIN NOT FOUND</p>
+    <button onclick="document.getElementById('lyrics').scrollIntoView({behavior: 'smooth'})">СЛУШАТЬ ДИСС</button>
 </header>
 
-<div class="container">
-    <div class="grid" id="main-list">
-        </div>
+<div class="meter-container">
+    <h2>УРОВЕНЬ IQ МАКСИМА</h2>
+    <div id="iq-bar"><div id="iq-fill"></div></div>
+    <p id="iq-status">СТАТУС: КЛИНИЧЕСКИЙ СЛУЧАЙ</p>
 </div>
 
-<div class="final-blow" onclick="shakeScreen()">
+<div class="visualizer">
+    <div class="bar" style="animation-delay: 0.1s"></div>
+    <div class="bar" style="animation-delay: 0.3s"></div>
+    <div class="bar" style="animation-delay: 0.2s"></div>
+    <div class="bar" style="animation-delay: 0.4s"></div>
+    <div class="bar" style="animation-delay: 0.1s"></div>
+</div>
+
+<div class="diss-lyrics" id="lyrics">
+    <h2>DISS TRACK: "МОЗГ В КРЕДИТ"</h2>
+    
+    <p>
+        Йоу, Макс, я заглянул в твою черепную коробку,<br>
+        Там перекати-поле и застрявшая пробка.<br>
+        Ты думаешь медленно, как винда на дискете,<br>
+        Ты — самый тупой персонаж на этой планете.
+        <span class="punchline">Твой мозг настолько мал, что у него есть свой микроскоп!</span>
+    </p>
+
+    <p>
+        Если тупость — это валюта, ты — Илон Маск,<br>
+        Ты путаешь право и лево, когда надеваешь маску.<br>
+        Ты пытался собрать пазл «0-3 года» за пять лет,<br>
+        И в конце гордился собой, неся этот бред.
+        <span class="punchline">Ты — ходячий аргумент против эволюции, бро!</span>
+    </p>
+
+    <p>
+        Твои мысли — это шум старого пылесоса,<br>
+        Ты зависаешь намертво от любого вопроса.<br>
+        «Сколько будет дважды два?» — для тебя это стресс,<br>
+        Твой интеллект ушел в минус, покинув процесс.
+        <span class="punchline">Даже калькулятор выдает "Error", когда ты рядом!</span>
+    </p>
+
+    <p>
+        Ты уникален, Макс, честно, без вранья:<br>
+        Ты единственный, кто проиграл в споре с табуреткой у меня.<br>
+        Твой уровень развития застыл на отметке «кисель»,<br>
+        Ты бы потерялся в комнате, где всего одна дверь.
+        <span class="punchline">Максим, ты не просто тупой, ты — легендарный!</span>
+    </p>
+</div>
+
+<div class="footer-banner">
     МАКСИМ, ИДИ НАХУЙ!
 </div>
 
-<footer>
-    &copy; Эпоха Противостояния. Тексты запрещены инквизицией Максима.
-</footer>
-
 <script>
-    const insults = [
-        "Максим — в жопе апельсин.", "Максим — везде невыносим.", "Максим — тупости исполин.",
-        "Максим — подзаборный господин.", "Максим — куриный властелин.", "Максим — мозгов ноль целых, один.",
-        "Максим — из говна и палок манекен.", "Максим — совести не нажил, член.", "Максим — в голове маргарин.",
-        "Максим — лох номер один.", "Максим — душный, как гуталин.", "Максим — пафосный блин.",
-        "Максим — по жизни кретин.", "Максим — трусливый пингвин.", "Максим — гнилой апельсин.",
-        "Максим — потный мандарин.", "Максим — соплей магазин.", "Максим — в супе волосок один.",
-        "Максим — позор из глубин.", "Максим — дешевый бензин.", "Максим — в штанах керосин.",
-        "Максим — деградации трамплин.", "Максим — заплесневелый блин.", "Максим — ума ни грамм, один.",
-        "Максим — кривой клавесин.", "Максим — недоразвитый филин.", "Максим — облезлый павлин.",
-        "Максим — дырявый кувшин.", "Максим — помойный дельфин.", "Максим — тухлый баклажан-исполин.",
-        "Максим — ватный паладин.", "Максим — фальшивый рубин.", "Максим — слюнявый карапуз-властелин.",
-        "Максим — недоделанный мутант-витамин.", "Максим — вонючий нафталин.", "Максим — в голове пластилин.",
-        "Максим — корявый исполин.", "Максим — тормозной арлекин.", "Максим — плешивый павлин.",
-        "Максим — вместо мозга — гуталин.", "Максим — старый дырявый ботинок один.", "Максим — вечно ноющий пингвин.",
-        "Максим — с подворотни дворянин.", "Максим — кислый гуталин.", "Максим — в цирке главный дебилин.",
-        "Максим — из мусора властелин.", "Максим — недожаренный блин.", "Максим — в штаны наложил, не один.",
-        "Максим — позорный гражданин.", "Максим — тухлый мандарин.", "Максим — гордый как... баран один.",
-        "Максим — не мужик, а балерин.", "Максим — в тарелке гнилой блин.", "Максим — пафоса на рубль, ума на алтын.",
-        "Максим — сонный бабуин.", "Максим — подгорелый блин.", "Максим — дырявый цеппелин.",
-        "Максим — кривой джавелин.", "Максим — в жопе нафталин.", "Максим — по жизни нелюдим и кретин.",
-        "Максим — сопливый паладин.", "Максим — ржавый карабин.", "Максим — недоделанный токсин.",
-        "Максим — вонючий маргарин.", "Максим — скользкий как налим.", "Максим — мы его не выносим.",
-        "Максим — по мозгам карантин.", "Максим — в голове пустой графин.", "Максим — унылый арлекин.",
-        "Максим — под столом один.", "Максим — страха властелин (когда в туалете один).", "Максим — по жизни подкаблучник и сардин.",
-        "Максим — недобитый дворянин.", "Максим — в борще кислый блин.", "Максим — кривой лимузин.",
-        "Максим — чести ни грамма, один лишь маргарин.", "Максим — гордый апельсин (с гнильцой внутри).", "Максим — в цирке главный заводила-кретин.",
-        "Максим — мокрой курицы сын.", "Максим — пафосный козёл-властелин.", "Максим — скучный как старый овин.",
-        "Максим — недоразвитый тиран-сатурнин.", "Максим — по жизни полный блин.", "Максим — в голове один опилкин.",
-        "Максим — трусости исполин.", "Максим — корявый херувим.", "Максим — всеми нелюбим.",
-        "Максим — тупости трамплин.", "Максим — злой как недотраханный пингвин.", "Максим — позорный исполин.",
-        "Максим — в каше гнилой изюм один.", "Максим — с горы пришедший дебилин.", "Максим — в армии диванных войск господин.",
-        "Максим — соплей магазин.", "Максим — пафосный как... старый кувшин.", "Максим — по жизни невыносим.",
-        "Максим — тупой, как старый валин.", "Максим — душный, как дым от шин.", "Максим — позорный мандарин.",
-        "Максим — просто сказочный уебан.", "Максим — финал близок, ты один."
-    ];
+    // Анимация бара при скролле
+    window.onscroll = function() {
+        if (window.scrollY > 100) {
+            document.getElementById('iq-fill').style.width = "0.1%";
+        }
+    };
 
-    const container = document.getElementById('main-list');
-    insults.forEach((text, i) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.setAttribute('data-num', i + 1);
-        card.innerHTML = `<div class="card-text">${text}</div>`;
-        container.appendChild(card);
-    });
-
-    function shakeScreen() {
-        document.body.style.animation = "shake 0.2s infinite";
-        setTimeout(() => {
-            document.body.style.animation = "none";
-            alert("Максим официально послан в Бездну!");
-        }, 500);
-    }
+    // Рандомные факты о тупости Максима в консоль
+    console.log("Максим думает, что HTML — это марка машины.");
+    console.log("Максим поливает кактус кока-колой.");
+    console.log("Максим пытается зарядить телефон от микроволновки.");
 </script>
-
-<style>
-    @keyframes shake {
-        0% { transform: translate(5px, 5px); }
-        25% { transform: translate(-5px, -5px); }
-        50% { transform: translate(5px, -5px); }
-        75% { transform: translate(-5px, 5px); }
-        100% { transform: translate(0, 0); }
-    }
-</style>
 
 </body>
 </html>
