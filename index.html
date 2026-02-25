@@ -179,6 +179,62 @@
         container.appendChild(card);
     });
 </script>
+    <div class="final-blow">
+        MAКСИМ, ИДИ НАХУЙ!
+    </div>
+
+    <style>
+        .final-blow {
+            width: 100%;
+            text-align: center;
+            padding: 100px 0;
+            background: linear-gradient(to top, #4a0000, transparent);
+            color: #ff0000;
+            font-size: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 15px;
+            text-shadow: 0 0 30px #ff0000, 5px 5px 0px #000;
+            animation: pulse 0.5s infinite alternate;
+            cursor: pointer;
+            margin-top: 50px;
+            border-top: 5px solid var(--gold);
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                text-shadow: 0 0 20px #ff0000;
+            }
+            to {
+                transform: scale(1.05);
+                text-shadow: 0 0 50px #ff0000, 0 0 20px #gold;
+            }
+        }
+
+        /* Эффект при клике: тряска экрана */
+        .final-blow:active {
+            animation: shake 0.1s infinite;
+            color: #fff;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(2px, 1px) rotate(0deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            40% { transform: translate(1px, -1px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            80% { transform: translate(1px, 1px) rotate(1deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+    </style>
+
+    <script>
+        // Небольшой интерактив: при клике на финальную фразу вылетает алерт
+        document.querySelector('.final-blow').addEventListener('click', () => {
+            alert('Послание доставлено. Максим в шоке.');
+        });
+    </script>
 
 </body>
 </html>
+
