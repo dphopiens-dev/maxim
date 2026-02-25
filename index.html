@@ -74,11 +74,11 @@
         }
 
         #iq-fill {
-            width: 90%; /* Начальное значение для анимации */
+            width: 95%; 
             height: 100%;
             background: var(--danger);
             box-shadow: 0 0 20px var(--danger);
-            transition: width 2s ease-in-out;
+            transition: width 2.5s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
         /* Diss Section */
@@ -114,9 +114,9 @@
             width: 10px;
             background: var(--neon);
             height: 10px;
+            transition: height 0.2s ease;
         }
 
-        /* Анимация бара включается через класс */
         .anim-active {
             animation: bounce 0.5s ease-in-out infinite alternate;
         }
@@ -130,53 +130,57 @@
             background: var(--danger);
             color: black;
             font-weight: 900;
-            font-size: 5rem;
+            font-size: clamp(2rem, 8vw, 5rem);
             padding: 50px 0;
             text-align: center;
             transform: rotate(-2deg);
             width: 110%;
             margin-left: -5%;
+            margin-top: 50px;
         }
 
         button {
             background: var(--neon);
             color: black;
-            padding: 15px 30px;
+            padding: 15px 40px;
             border: none;
             font-family: 'Roboto Mono';
             font-weight: bold;
             cursor: pointer;
             margin-top: 20px;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        button:hover { background: white; box-shadow: 0 0 20px var(--neon); }
+        button:hover { background: white; box-shadow: 0 0 30px var(--neon); transform: scale(1.1); }
 
         #audio-status {
-            font-size: 0.8rem;
-            margin-top: 10px;
+            font-size: 0.9rem;
+            margin-top: 15px;
             color: var(--neon);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-<audio id="dissAudio">
+<audio id="dissAudio" preload="auto">
     <source src="music.mp3" type="audio/mpeg">
-    Твой браузер не тянет музыку.
 </audio>
 
 <header>
     <div class="glitch">МАКСИМ УЕБАН</div>
     <p>ERROR 404: BRAIN NOT FOUND</p>
-    <button id="playBtn">СЛУШАТЬ ДИСС</button>
-    <div id="audio-status"></div>
+    <button id="playBtn">ВРУБИТЬ ДИСС</button>
+    <div id="audio-status">READY TO DISMANTLE MAXIM</div>
 </header>
 
 <div class="meter-container">
-    <h2>УРОВЕНЬ IQ МАКСИМА</h2>
+    <h2>УРОВЕНЬ ИНТЕЛЛЕКТА (MAXIM.EXE)</h2>
     <div id="iq-bar"><div id="iq-fill"></div></div>
-    <p id="iq-status">СТАТУС: АНАЛИЗ...</p>
+    <p id="iq-status">СТАТУС: ОЖИДАНИЕ ЗАПУСКА...</p>
 </div>
 
 <div class="visualizer" id="viz">
@@ -184,7 +188,8 @@
     <div class="bar" style="animation-delay: 0.3s"></div>
     <div class="bar" style="animation-delay: 0.2s"></div>
     <div class="bar" style="animation-delay: 0.4s"></div>
-    <div class="bar" style="animation-delay: 0.1s"></div>
+    <div class="bar" style="animation-delay: 0.5s"></div>
+    <div class="bar" style="animation-delay: 0.2s"></div>
 </div>
 
 <div class="diss-lyrics" id="lyrics">
@@ -233,31 +238,36 @@
     const bars = document.querySelectorAll('.bar');
     const iqFill = document.getElementById('iq-fill');
     const iqStatus = document.getElementById('iq-status');
+    const statusText = document.getElementById('audio-status');
 
     playBtn.addEventListener('click', () => {
-        // Запуск аудио
+        // "Пинок" для браузера, чтобы загрузил файл
+        audio.load();
+        
+        // Попытка воспроизведения
         audio.play().then(() => {
-            document.getElementById('audio-status').innerText = "TRACK PLAYING...";
-            // Включаем анимацию визуализатора
+            statusText.innerText = "BASS BOOSTED DISS PLAYING...";
+            statusText.style.color = "#00ff41";
+            
+            // Включаем "прыгающие" бары
             bars.forEach(bar => bar.classList.add('anim-active'));
-        }).catch(e => {
-            document.getElementById('audio-status').innerText = "ОШИБКА: Закинь music.mp3 в папку!";
-            console.error("Файл music.mp3 не найден", e);
+            
+            // Запускаем деградацию IQ
+            setTimeout(() => {
+                iqFill.style.width = "0.1%";
+                iqStatus.innerText = "СТАТУС: КЛИНИЧЕСКИЙ СЛУЧАЙ (0.1 IQ)";
+                iqStatus.style.color = "#ff003c";
+            }, 300);
+
+        }).catch(error => {
+            statusText.innerText = "ОШИБКА: music.mp3 не найден!";
+            statusText.style.color = "#ff003c";
+            console.error("Audio error:", error);
         });
 
-        // Скролл к тексту
-        document.getElementById('lyrics').scrollIntoView({behavior: 'smooth'});
-        
-        // Анимация падения IQ
-        setTimeout(() => {
-            iqFill.style.width = "0.1%";
-            iqStatus.innerText = "СТАТУС: КЛИНИЧЕСКИЙ СЛУЧАЙ (0.1 IQ)";
-        }, 500);
+        // Плавный скролл к диссу
+        document.getElementById('lyrics').scrollIntoView({ behavior: 'smooth' });
     });
-
-    // Консольные пасхалки
-    console.log("System: Maxim detection completed.");
-    console.log("Result: 100% ueban.");
 </script>
 
 </body>
